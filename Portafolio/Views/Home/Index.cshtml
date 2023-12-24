@@ -1,97 +1,37 @@
-﻿@model Persona
+﻿@model HomeIndexViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Soy Gabriel Rodriguez </h1>
-    <h2>Soy un desarrollador en C# y .NET, siempre estoy investigando y aplicando conocimientos en otros lenguajes.</h2>
+<partial name="_Presentacion"/>
 
-    <img 
-        id="foto"
-        src="~/imagenes/grodriguez.jpeg" alt="Foto perfil de Gabriel"/>
-</div>
+<partial name="_Habilidades" />
 
-<div class="text-center">
-    <img id="imagen-dotnet" src="~/imagenes/dotnet-imagen-2.png"/>
-</div>
-
-<div class="row justify-content-center text-center bg-primary">
-    <div class="col col-md-7 seccion-bienvenida">
-        <h1>Te doy la bienvenida a mi portafolio</h1>
-        <p>
-            Me dedico a la industria IT profesionalmente desde el 2016 en diversos campos. Entre mis experiencias se incluye el servicio técnico de software y hardware en GTD Manquehue,
-            lo que me entregó un cariño que aún sostengo por el ensamblado y creación de prototipos con diversas tecnologías. Además, contribuí a la puesta en marcha y ejecución final
-            del Licenciamiento del sistema Genhoras a nivel nacional para el cliente Instituto de Previsión Social. Esto habla de un software que, mediante lectura biométrica, registra
-            la asistencia de los contribuidores y mantiene al tanto de todos los registros a la oficina central ubicada en la Región Metropolitana. Actualmente, trabajo en Dimension S.A.
-            como desarrollador en C# .NET, generando UX/UI e interfaces para el cliente BBVA Colombia para el negocio de Factoring especificamente integrando diferentes tecnologias.
-        </p>
+@if(Model.Proyectos is not null)
+{
+    <div class="text-center" style="padding-top: 6rem;">
+        <h1>Mis trabajos recientes</h1>
+        <p>Aquí puedes ver algunos de mis trabajos más recientes.</p>
     </div>
-</div>
 
-<div style="margin-top: -105px">
-    <div class="row justify-content-md-center text-center">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach(var proyecto in Model.Proyectos)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@proyecto.ImagenURL" class="card-img-top" alt="imagen proyecto"/>
+                        <div class="card-body">
+                            <h5 class="card-title">@proyecto.Titulo</h5>
+                            <p class="card-text">@proyecto.Descripcion</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="@proyecto.Link" target="_blank" rel="noopener noreferrer">Visitar</a>
+                        </div>
+                    </div>
 
-        <div class="col col-3 bg-white habilidades" style="border-radius: 15px 0 0 15px; box-shadow: 0 5px 5px 0 gray">
-            <h3>Back-end</h3>
-
-            <p>
-                Trabajo desde el desarrollo, pruebas automáticas y puesta en produccion con entrega continua.
-            </p>
-
-            <p class="text-primary cabecera">
-                Stack:
-            </p>
-
-            <p>
-                ASP.NET Core, SQL Server, PHPMyAdmin
-            </p>
-
-            <p class="text-primary cabecera">
-                Experiencia:
-            </p>
-
-            <ul>
-                <li>Web APIs</li>
-                <li>ASP.NET Core MVC</li>
-                <li>Entity Framework Core</li>
-                <li>Blazor</li>
-                <li>Queries</li>
-                <li>NodeJS</li>
-                <li>Firebase</li>
-            </ul>
-        </div>
-
-        <div class="col col-3 bg-white habilidades" style="border-radius: 0 15px 15px 0; box-shadow: 0 5px 5px 0 gray">
-
-            <h3>Front-End</h3>
-
-            <p>
-                Puedo crear front-ends robustos los cuales cumplen con los requerimientos del negocio.
-            </p>
-
-            <p class="text-primary cabecera">
-                Stack:
-            </p>
-
-            <p>
-                VueJS, Blazor, Figma, Ilustrator
-            </p>
-
-            <p class="text-primary cabecera">
-                Experiencia:
-            </p>
-
-            <ul>
-                <li>Vue Hooks</li>
-                <li>Vue Material</li>
-                <li>Blazor WASM</li>
-                <li>JQuery</li>
-                <li>Sass</li>
-                <li>Responsive</li>
-                <li>Bootstrap</li>
-            </ul>
-
+                </div>
+            }
         </div>
     </div>
-</div>
+}
